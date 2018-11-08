@@ -47,7 +47,7 @@ public class Mundo {
 		gravedadAcumulada=0;
 		EstadoMonedas=0;
 		velocidadGoombasX=1;
-		velocidadCaparazonesX=2;
+		velocidadCaparazonesX=1;
 		velocidadGoombasY=1;
 		velocidadCaparazonesY=1;
 	}
@@ -2252,12 +2252,13 @@ public class Mundo {
 	 * @return si hay o no interseccion
 	 * 
 	 */
+	
 	public void movimientoEnemigosX(){
 		for (int i = 0; i < aGoombas.size(); i++) {
-			aGoombas.get(i).move(aGoombas.get(i).getX() + aGoombas.get(i).getVelX(), (aGoombas.get(i).getY()));
+			aGoombas.get(i).move((aGoombas.get(i).getX() + aGoombas.get(i).getVelX()), aGoombas.get(i).getY());
 		}
 		for (int i = 0; i < aCaparazones.size(); i++) {
-			aCaparazones.get(i).move(aCaparazones.get(i).getX() + aCaparazones.get(i).getVelX(), (aCaparazones.get(i).getY()));
+			aCaparazones.get(i).move(aCaparazones.get(i).getX() + aCaparazones.get(i).getVelX(), aCaparazones.get(i).getY());
 		}
 	}
 	public void interseccionGoombasIzquierda(){
