@@ -18,9 +18,9 @@ public class JButtonPlay extends JButton{
 	public JButtonPlay() {
 		try {
 
-			setIcon(new ImageIcon(JLabelCaparazon.class.getResource("/imagenes/Play.png").toURI().toURL()));
+			setIcon(new ImageIcon(JButtonPlay.class.getResource("/imagenes/Play.png").toURI().toURL()));
 		} catch (Exception e) {
-			System.err.println("Error en carga de recurso: CaparazonVerde.png no encontrado");
+			System.err.println("Error en carga de recurso: Play.png no encontrado");
 			e.printStackTrace();
 		}
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

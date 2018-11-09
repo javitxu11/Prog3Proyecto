@@ -138,8 +138,9 @@ public class VJuego extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if (miHilo != null)
-					miHilo.acabaMuerto();
+				if (miHilo != null) {
+				miHilo.acabaMuerto();
+				}
 			}
 		});
 		
@@ -185,8 +186,8 @@ public class VJuego extends JFrame {
 	}
 	
 	public void cronometro(){
-		while(minLeft>=0 && isHiloSigue()){
-			while(secLeft>=0 && isHiloSigue()){
+		while(minLeft>=0 ){
+			while(secLeft>=0 ){
 				delaySegundo();
 				LabelTemp.setText(minLeft+":"+secLeft);
 				secLeft--;

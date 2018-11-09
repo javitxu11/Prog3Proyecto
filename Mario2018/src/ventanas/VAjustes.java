@@ -20,7 +20,7 @@ public class VAjustes extends JFrame {
 	private JPanel contentPane;
 	
 	public VAjustes(VInicio Vinicio) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 100, 100);
 		setLocationRelativeTo(null);
 		setResizable(false);

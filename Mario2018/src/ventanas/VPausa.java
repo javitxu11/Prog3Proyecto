@@ -19,7 +19,7 @@ public class VPausa extends JFrame {
 	private JPanel contentPane;
 	
 	public VPausa(VInicio vinicio, VJuego vjuego) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 272, 292);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
