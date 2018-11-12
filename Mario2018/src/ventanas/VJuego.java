@@ -186,8 +186,8 @@ public class VJuego extends JFrame {
 	}
 	
 	public void cronometro(){
-		while(minLeft>=0 ){
-			while(secLeft>=0 ){
+		while(minLeft>=0 && isHiloSigue() ){
+			while(secLeft>=0 && isHiloSigue()){
 				delaySegundo();
 				LabelTemp.setText(minLeft+":"+secLeft);
 				secLeft--;
@@ -195,7 +195,7 @@ public class VJuego extends JFrame {
 			secLeft=59;
 			minLeft--;
 		}
-		VentJuego.miHilo.acabaMuerto();
+		VentJuego.miHilo1.acabaMuerto();
 	}
 	
 	private static void delaySegundo(){
@@ -207,6 +207,11 @@ public class VJuego extends JFrame {
 	class MiRunnable1 implements Runnable {
 		public void run() {
 			cronometro();
+		}
+
+		public void acabaMuerto() {
+			// TODO Auto-generated method stub
+			
 		}
 	}
 	class MiRunnable implements Runnable {
