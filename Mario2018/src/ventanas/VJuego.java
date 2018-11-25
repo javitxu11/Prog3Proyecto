@@ -53,7 +53,8 @@ public class VJuego extends JFrame {
 	MiRunnable1 miHilo1 = null; // Hilo del cronometro
 	
 	public VJuego(VInicio vinicio) {
-		Vinicio=vinicio;
+		System.out.println( "Creando ventana juego" );
+		Vinicio=vinicio; 
 		setResizable(false);
 		setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),345);
 		setLocationRelativeTo(null);
@@ -82,18 +83,14 @@ public class VJuego extends JFrame {
 					break;
 				}
 				case KeyEvent.VK_ESCAPE: {
+					System.out.println( "Pulsa escape");
 					teclaPulsada[3] = true;
 					break;
 				}
 				}
 			}
-		});
-	
-		pPrincipal.addKeyListener(new KeyAdapter() {
-	
 			@Override
 			public void keyReleased(KeyEvent e) {
-	
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_W: {
 					teclaPulsada[0] = false;
@@ -108,6 +105,7 @@ public class VJuego extends JFrame {
 					break;
 				}
 				case KeyEvent.VK_ESCAPE: {
+					System.out.println( "Suelta escape");
 					teclaPulsada[3] = false;
 					break;
 				}
@@ -217,203 +215,212 @@ public class VJuego extends JFrame {
 	class MiRunnable implements Runnable {
 		
 		public void run() { // Bucle principal forever hasta que se pare el juego...
+			System.out.println(VentJuego+"  "+VentJuego.isHiloSigue());
 			while (sigo){
-				
-				if(isHiloSigue()) {
-					
+				// System.out.println("  " + VentJuego.isHiloSigue());
 				try {
 					pPrincipal.repaint();
 					Thread.sleep(3);
 					pPrincipal.repaint();
 				} catch (Exception e) {
 				}
-				
-				if(teclaPulsada[3]==true){
-					setHiloSigue(false);
-					VPausa vpausa = new VPausa(Vinicio,VentJuego);
-					vpausa.setVisible(true);
-				}
-				
-				//GOOMBAS/CAPARAZONES
-				//GOOMBAS/CAPARAZONES
-				Mundo.movimientoEnemigosX();
-				Mundo.interseccionGoombasDerecha();
-				Mundo.interseccionGoombasIzquierda();
-				Mundo.interseccionCaparazonesIzquierda();
-				Mundo.interseccionCaparazonesDerecha();
-				
-				//Interacciones con goombas y caparazones FALTA
-				//Interacciones con goombas y caparazones FALTA
-				if(Mundo.interseccionCaparazonArriba()){
-					Mario.saltoMario();
-					ClipStomp.play();
-					Score=Score+12;
-					LabelScore.setText("Score: "+Score);
-				}
-				if(Mundo.interseccionGoombaArriba()){
-					Mario.saltoMario();
-					ClipStomp.play();
-					Score=Score+8;
-					LabelScore.setText("Score: "+Score);
-				}
-				if(Mundo.interseccionCaparazonAbajo()){
-					acabaMuerto();
-				}
-				if(Mundo.interseccionGoombaAbajo()){
-					acabaMuerto();
-				}
-				//MONEDAS
-				//MONEDAS
-			if(Mundo.interseccionMonedasPares()){
-				ClipMoneda1.play();
-				Score=Score+1;
-				LabelScore.setText("Score: "+Score);
-			}
-			if(Mundo.interseccionMonedasImpares()){
-				ClipMoneda2.play();
-				Score=Score+1;
-				LabelScore.setText("Score: "+Score);
-			}
-			Mundo.mueveMonedas();
-			Mundo.EstadoMonedas++;
-			if(Mundo.EstadoMonedas==100){
-				Mundo.EstadoMonedas=0;
-			}
-				// CORRECCION DE COLISIONES
-				// CORRECCION DE COLISIONES
-			Mundo.interseccionEsquinasArriba();
-			Mundo.interseccionEsquinasAbajo();
-				// FINAL
-				// FINAL
-			if(Mario.getPosX()>1250){
-				acabaVivo();
-				VentJuego.dispose();
-				
-			}
-//			if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
-//				finalVisto=true;
-//			}
-			
-				// QUIETO
-				// QUIETO
-			if(!teclaPulsada[0] && !teclaPulsada[1] && !teclaPulsada[2] && !Mario.salto){
-				if(!Mario.getGrafico().EsEspejo()){
-					Mario.getGrafico().setComponentOrientationMarioQuieto();
-				}
-				if(Mario.getGrafico().EsEspejo()){
-					Mario.getGrafico().setComponentOrientationMarioQuietoEspejo();
-				}
-			}
-				// GRAVEDAD	VERTICAL SALTOS
-				// GRAVEDAD VERTICAL SALTOS
+				if(isHiloSigue()) {
 
-			Mario.setPosY(Mario.getPosY()+Mario.velY);
-			
-			if (Mario.getPosY()>400){
-				acabaMuerto();
-			}
-			if (Mundo.interseccionArriba()){
-				Mario.velY=0;
-				if (teclaPulsada[0]){
-					Mario.saltoMario();
-					ClipSalto.play();
-				}
-			}
-			
-			if(!Mundo.interseccionArriba() && Mario.salto){
-				Mundo.gravedadAcumulada=Mundo.gravedadAcumulada+Mundo.gravedad;
-				Mario.velY=Mario.velY+((int)Mundo.gravedadAcumulada);
-			}
-			
-			if((int)Mundo.gravedadAcumulada>=1 || Mundo.interseccionArriba()){
-				Mundo.gravedadAcumulada=0;
-			}
-			
-			if(Mario.velY==0){
-				Mario.salto=false;
-				
-			}
-			
-			if(!Mundo.interseccionArriba() && !Mario.salto){
-				Mario.velY=1;
-			}
-			
-			if(Mundo.interseccionAbajo() && Mario.salto){
-				Mario.velY=0;
-			}
-			
-			// DERECHA
-			// DERECHA
-		if (!Mundo.interseccionIzquierda()) {
-			if (teclaPulsada[1]) {
-//				System.out.println(pPrincipal.getVar());
-				Mario.getGrafico().setComponentOrientationNormal();
-				if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
-					pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
-					Mundo.moverObjetoI(Mario.velX);
-				}
-				
-				if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
-					Mario.setPosX(Mario.getPosX()+Mario.velX);
-				}
-			}
-		}
-//			 IZQUIERDA
-//			 IZQUIERDA
-			if (!Mundo.interseccionDerecha()) {
-				if (teclaPulsada[2]) {
-					Mario.getGrafico().setComponentOrientationEspejo();
-					if(pPrincipal.getVar() < 0){
-						pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
-						Mundo.moverObjetoD(Mario.velX);
+					try {
+						pPrincipal.repaint();
+						Thread.sleep(3);
+						pPrincipal.repaint();
+					} catch (Exception e) {
 					}
-					else if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
-						Mario.setPosX(Mario.getPosX()-Mario.velX);
+
+					if(teclaPulsada[3]==true){
+						System.out.println("  Vuelta a pausa " + VentJuego.isHiloSigue());
+						setHiloSigue(false);
+						VPausa vpausa = new VPausa(Vinicio,VJuego.this);
+						teclaPulsada[3] = false;
+						vpausa.setVisible(true);
 					}
-				}
-			}
-			pPrincipal.repaint();
-			
-//				// DERECHA
-//				// DERECHA
-//			if (!Mundo.interseccionIzquierda()) {
-//				if (teclaPulsada[1]) {
-//					Mario.getGrafico().setComponentOrientationNormal();
-//					if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320
-//							&& Mario.getPosX()>=150){
-//						pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
-//						Mundo.moverObjetoI(Mario.velX);
-//						Mario.setPosX(Mario.getPosX()-Mario.velX);
-//						pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
-//						Mundo.moverObjetoI(Mario.velX);
-//					}else if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320
-//							&& Mario.getPosX()<150){
-//						pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
-//						Mundo.moverObjetoI(Mario.velX);
-//					}else if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
-//						Mario.setPosX(Mario.getPosX()+Mario.velX);
-//					}
-//				}
-//			}
-////				 IZQUIERDA
-////				 IZQUIERDA
-//				if (!Mundo.interseccionDerecha()) {
-//					if (teclaPulsada[2]) {
-//						Mario.getGrafico().setComponentOrientationEspejo();
-//						if(pPrincipal.getVar()<0 && Mario.getPosX()<=1150){
-//							pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
-//							Mundo.moverObjetoD(Mario.velX);
-//							Mario.setPosX(Mario.getPosX()+Mario.velX);
-//							pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
-//							Mundo.moverObjetoD(Mario.velX);
-//						}else if (pPrincipal.getVar()<0 && Mario.getPosX()>1150){
-//							pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
-//							Mundo.moverObjetoD(Mario.velX);
-//						}else if (pPrincipal.getVar()>=0){
-//							Mario.setPosX(Mario.getPosX()-Mario.velX);
-//						}
-//					}
-//				}		
+
+					//GOOMBAS/CAPARAZONES
+					//GOOMBAS/CAPARAZONES
+					Mundo.movimientoEnemigosX();
+					Mundo.interseccionGoombasDerecha();
+					Mundo.interseccionGoombasIzquierda();
+					Mundo.interseccionCaparazonesIzquierda();
+					Mundo.interseccionCaparazonesDerecha();
+
+					//Interacciones con goombas y caparazones FALTA
+					//Interacciones con goombas y caparazones FALTA
+					if(Mundo.interseccionCaparazonArriba()){
+						Mario.saltoMario();
+						ClipStomp.play();
+						Score=Score+12;
+						LabelScore.setText("Score: "+Score);
+					}
+					if(Mundo.interseccionGoombaArriba()){
+						Mario.saltoMario();
+						ClipStomp.play();
+						Score=Score+8;
+						LabelScore.setText("Score: "+Score);
+					}
+					if(Mundo.interseccionCaparazonAbajo()){
+						acabaMuerto();
+					}
+					if(Mundo.interseccionGoombaAbajo()){
+						acabaMuerto();
+					}
+					//MONEDAS
+					//MONEDAS
+					if(Mundo.interseccionMonedasPares()){
+						ClipMoneda1.play();
+						Score=Score+1;
+						LabelScore.setText("Score: "+Score);
+					}
+					if(Mundo.interseccionMonedasImpares()){
+						ClipMoneda2.play();
+						Score=Score+1;
+						LabelScore.setText("Score: "+Score);
+					}
+					Mundo.mueveMonedas();
+					Mundo.EstadoMonedas++;
+					if(Mundo.EstadoMonedas==100){
+						Mundo.EstadoMonedas=0;
+					}
+					// CORRECCION DE COLISIONES
+					// CORRECCION DE COLISIONES
+					Mundo.interseccionEsquinasArriba();
+					Mundo.interseccionEsquinasAbajo();
+					// FINAL
+					// FINAL
+					if(Mario.getPosX()>1250){
+						acabaVivo();
+						VentJuego.dispose();
+
+					}
+					//			if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
+					//				finalVisto=true;
+					//			}
+
+					// QUIETO
+					// QUIETO
+					if(!teclaPulsada[0] && !teclaPulsada[1] && !teclaPulsada[2] && !Mario.salto){
+						if(!Mario.getGrafico().EsEspejo()){
+							Mario.getGrafico().setComponentOrientationMarioQuieto();
+						}
+						if(Mario.getGrafico().EsEspejo()){
+							Mario.getGrafico().setComponentOrientationMarioQuietoEspejo();
+						}
+					}
+					// GRAVEDAD	VERTICAL SALTOS
+					// GRAVEDAD VERTICAL SALTOS
+
+					Mario.setPosY(Mario.getPosY()+Mario.velY);
+
+					if (Mario.getPosY()>400){
+						acabaMuerto();
+					}
+					if (Mundo.interseccionArriba()){
+						Mario.velY=0;
+						if (teclaPulsada[0]){
+							Mario.saltoMario();
+							ClipSalto.play();
+						}
+					}
+
+					if(!Mundo.interseccionArriba() && Mario.salto){
+						Mundo.gravedadAcumulada=Mundo.gravedadAcumulada+Mundo.gravedad;
+						Mario.velY=Mario.velY+((int)Mundo.gravedadAcumulada);
+					}
+
+					if((int)Mundo.gravedadAcumulada>=1 || Mundo.interseccionArriba()){
+						Mundo.gravedadAcumulada=0;
+					}
+
+					if(Mario.velY==0){
+						Mario.salto=false;
+
+					}
+
+					if(!Mundo.interseccionArriba() && !Mario.salto){
+						Mario.velY=1;
+					}
+
+					if(Mundo.interseccionAbajo() && Mario.salto){
+						Mario.velY=0;
+					}
+
+					// DERECHA
+					// DERECHA
+					if (!Mundo.interseccionIzquierda()) {
+						if (teclaPulsada[1]) {
+							//				System.out.println(pPrincipal.getVar());
+							Mario.getGrafico().setComponentOrientationNormal();
+							if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
+								pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
+								Mundo.moverObjetoI(Mario.velX);
+							}
+
+							if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
+								Mario.setPosX(Mario.getPosX()+Mario.velX);
+							}
+						}
+					}
+					//			 IZQUIERDA
+					//			 IZQUIERDA
+					if (!Mundo.interseccionDerecha()) {
+						if (teclaPulsada[2]) {
+							Mario.getGrafico().setComponentOrientationEspejo();
+							if(pPrincipal.getVar() < 0){
+								pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
+								Mundo.moverObjetoD(Mario.velX);
+							}
+							else if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
+								Mario.setPosX(Mario.getPosX()-Mario.velX);
+							}
+						}
+					}
+					pPrincipal.repaint();
+
+					//				// DERECHA
+					//				// DERECHA
+					//			if (!Mundo.interseccionIzquierda()) {
+					//				if (teclaPulsada[1]) {
+					//					Mario.getGrafico().setComponentOrientationNormal();
+					//					if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320
+					//							&& Mario.getPosX()>=150){
+					//						pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
+					//						Mundo.moverObjetoI(Mario.velX);
+					//						Mario.setPosX(Mario.getPosX()-Mario.velX);
+					//						pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
+					//						Mundo.moverObjetoI(Mario.velX);
+					//					}else if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320
+					//							&& Mario.getPosX()<150){
+					//						pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
+					//						Mundo.moverObjetoI(Mario.velX);
+					//					}else if(pPrincipal.getVar() <= (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
+					//						Mario.setPosX(Mario.getPosX()+Mario.velX);
+					//					}
+					//				}
+					//			}
+					////				 IZQUIERDA
+					////				 IZQUIERDA
+					//				if (!Mundo.interseccionDerecha()) {
+					//					if (teclaPulsada[2]) {
+					//						Mario.getGrafico().setComponentOrientationEspejo();
+					//						if(pPrincipal.getVar()<0 && Mario.getPosX()<=1150){
+					//							pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
+					//							Mundo.moverObjetoD(Mario.velX);
+					//							Mario.setPosX(Mario.getPosX()+Mario.velX);
+					//							pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
+					//							Mundo.moverObjetoD(Mario.velX);
+					//						}else if (pPrincipal.getVar()<0 && Mario.getPosX()>1150){
+					//							pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);
+					//							Mundo.moverObjetoD(Mario.velX);
+					//						}else if (pPrincipal.getVar()>=0){
+					//							Mario.setPosX(Mario.getPosX()-Mario.velX);
+					//						}
+					//					}
+					//				}		
 				}
 			}
 		}
