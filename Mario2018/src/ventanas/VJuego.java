@@ -207,7 +207,7 @@ public class VJuego extends JFrame {
 		return minLeft;
 	}
 	
-	public void setMinLeft(int minLeft) { 
+	public void setMinLeft(int minLeft) {  
 		this.minLeft = minLeft;
 	}
 	
