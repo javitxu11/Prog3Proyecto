@@ -49,7 +49,7 @@ public class VFinalMala extends JFrame {
 		
 		JButton BotonRestart = new JButton();
 		BotonRestart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.out.println("Restart");
 				vjuego.miHilo.stop();
 				vjuego.dispose();
