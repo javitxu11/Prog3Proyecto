@@ -200,13 +200,14 @@ public class VJuego extends JFrame {
 			secLeft=59;
 			minLeft--;
 		}
+		
 		VentJuego.miHilo1.acabaMuerto();
 	}
 	public int getMinLeft() {
 		return minLeft;
 	}
 	
-	public void setMinLeft(int minLeft) {
+	public void setMinLeft(int minLeft) { 
 		this.minLeft = minLeft;
 	}
 	
