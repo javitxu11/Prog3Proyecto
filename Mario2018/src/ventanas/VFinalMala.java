@@ -52,7 +52,6 @@ public class VFinalMala extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Restart");
 				vjuego.miHilo.stop();
-				
 				vjuego.dispose();
 				VJuego ventana2 = new VJuego(vinicio);
 				ventana2.dispose();
