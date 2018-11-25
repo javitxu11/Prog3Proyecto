@@ -210,7 +210,7 @@ public class VJuego extends JFrame {
 	public void setMinLeft(int minLeft) {
 		this.minLeft = minLeft;
 	}
-	//hola
+	
 	public int getSecLeft() {
 		return secLeft;
 	}
