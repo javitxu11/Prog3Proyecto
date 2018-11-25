@@ -185,7 +185,9 @@ public class VJuego extends JFrame {
 		this.hiloSigue = hiloSigue;
 	}
 	
-	public void cronometro(){
+	public void cronometro(int secs, int mins){
+		minLeft=mins;
+		secLeft=secs;
 		while(minLeft>=0 && isHiloSigue() ){
 			while(secLeft>=0 && isHiloSigue()){
 				delaySegundo();
@@ -197,6 +199,25 @@ public class VJuego extends JFrame {
 		}
 		VentJuego.miHilo1.acabaMuerto();
 	}
+	public int getMinLeft() {
+		return minLeft;
+	}
+
+	public void setMinLeft(int minLeft) {
+		this.minLeft = minLeft;
+	}
+
+	public int getSecLeft() {
+		return secLeft;
+	}
+
+	public void setSecLeft(int secLeft) {
+		this.secLeft = secLeft;
+	}
+
+	public void resumeCronometro(int secs, int mins) {
+		this.cronometro(secs, mins);
+	}
 	
 	private static void delaySegundo(){
 		try {
@@ -206,10 +227,15 @@ public class VJuego extends JFrame {
 	
 	class MiRunnable1 implements Runnable {
 		public void run() {
-			cronometro();
+			cronometro(secLeft, minLeft);
 		}
 
 		public void acabaMuerto() {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void resume() {
 			// TODO Auto-generated method stub
 			
 		}
@@ -451,6 +477,12 @@ public class VJuego extends JFrame {
 			sigo=false;
 			VentJuego.dispose();
 			setHiloSigue(false);
+		}
+		public void resume() {
+			ClipNivel.play();
+			sigo=true;
+			setHiloSigue(true);
+			
 		}
 	};
 }
