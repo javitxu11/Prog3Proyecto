@@ -52,6 +52,7 @@ public class VJuego extends JFrame {
 	MiRunnable miHilo = null; // Hilo del bucle principal de juego
 	MiRunnable1 miHilo1 = null; // Hilo del cronometro
 	
+	
 	public VJuego(VInicio vinicio) {
 		System.out.println( "Creando ventana juego" );
 		Vinicio=vinicio; 
@@ -65,7 +66,8 @@ public class VJuego extends JFrame {
 		pPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(pPrincipal);
 		pPrincipal.setLayout(null);
-	
+		
+		
 		pPrincipal.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -147,10 +149,12 @@ public class VJuego extends JFrame {
 	public void Arranque() { 					// Crea y visibiliza la ventana con los objetos
 		
 		
+		
+		this.secLeft=0;
+		this.minLeft=2;
+		
 		this.Mundo = new Mundo(this.pPrincipal);
-		
 		this.Score = 0;
-		
 		this.Mario = new Mario();
 		this.Mundo.creaMario(145,290);
 		this.Mario = this.Mundo.getMario();
@@ -159,9 +163,7 @@ public class VJuego extends JFrame {
 		this.Mundo.creaMonedas();
 		this.Mundo.creaCaparazones();
 		this.Mundo.creaGoombas();
-		this.secLeft=0;
-		this.minLeft=2;
-		
+
 		ClipNivel.loop();
 		
 		this.miHilo = this.new MiRunnable(); 	// Sintaxis de new para clase interna
