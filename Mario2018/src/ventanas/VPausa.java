@@ -43,10 +43,10 @@ public class VPausa extends JFrame {
 		BotonResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Resume");
-				vjuego.setHiloSigue(true);
-				int secsleft=vjuego.getSecLeft();
-				int minsleft=vjuego.getMinLeft();
-				vjuego.resumeCronometro(secsleft, minsleft);
+				vjuego.setPausa(false);
+				//int secsleft=vjuego.getSecLeft();
+			//int minsleft=vjuego.getMinLeft();
+			//	vjuego.resumeCronometro(secsleft, minsleft);
 				// System.err.println(vjuego+"  "+vjuego.isHiloSigue());
 				dispose();
 			}

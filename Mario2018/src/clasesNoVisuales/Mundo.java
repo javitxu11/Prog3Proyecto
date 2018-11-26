@@ -34,11 +34,11 @@ public class Mundo {
 	public int velocidadGoombasY;
 	public int velocidadCaparazonesY;
 	
-	public static ArrayList<JLabelBloque> aBloques = new ArrayList<JLabelBloque>(); //Aray que guarda los bloques
-	public static ArrayList<JLabelRectangulo> aRectangulos = new ArrayList<JLabelRectangulo>();
-	public static ArrayList<JLabelCaparazon> aCaparazones = new ArrayList<JLabelCaparazon>();
-	public static ArrayList<JLabelGoomba> aGoombas = new ArrayList<JLabelGoomba>();
-	public static ArrayList<JLabelMoneda> aMonedas = new ArrayList<JLabelMoneda>();
+	public  ArrayList<JLabelBloque> aBloques = new ArrayList<JLabelBloque>(); //Aray que guarda los bloques
+	public  ArrayList<JLabelRectangulo> aRectangulos = new ArrayList<JLabelRectangulo>();
+	public ArrayList<JLabelCaparazon> aCaparazones = new ArrayList<JLabelCaparazon>();
+	public  ArrayList<JLabelGoomba> aGoombas = new ArrayList<JLabelGoomba>();
+	public  ArrayList<JLabelMoneda> aMonedas = new ArrayList<JLabelMoneda>();
 	
 	public Mundo(JPanelFondo panel) {
 		this.panel = panel;
