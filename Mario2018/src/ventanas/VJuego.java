@@ -87,6 +87,7 @@ public class VJuego extends JFrame {
 				case KeyEvent.VK_ESCAPE: {
 					System.out.println( "Pulsa escape");
 					teclaPulsada[3] = true;
+					
 					break;
 				}
 				}
@@ -184,7 +185,10 @@ public class VJuego extends JFrame {
 	public void setHiloSigue(boolean hiloSigue) {
 		this.hiloSigue = hiloSigue;
 	}
-	
+	private boolean enPausa = false;
+	public void setPausa(boolean pausa) {
+		enPausa = pausa;
+	}
 	public void cronometro(int secs, int mins){
 		minLeft=mins;
 		secLeft=secs;
@@ -195,7 +199,9 @@ public class VJuego extends JFrame {
 				System.out.println(minLeft+" "+secLeft);
 				delaySegundo();
 				LabelTemp.setText(minLeft+":"+secLeft);
+				if(!enPausa) {
 				secLeft--;
+				}
 			}
 			secLeft=59;
 			minLeft--;
@@ -207,7 +213,7 @@ public class VJuego extends JFrame {
 		return minLeft;
 	}
 	
-	public void setMinLeft(int minLeft) {
+	public void setMinLeft(int minLeft) {  
 		this.minLeft = minLeft;
 	}
 	
@@ -253,7 +259,7 @@ public class VJuego extends JFrame {
 					pPrincipal.repaint();
 				} catch (Exception e) {
 				}
-				if(isHiloSigue()) {
+				if(!enPausa) {
 
 					try {
 						pPrincipal.repaint();
@@ -264,7 +270,7 @@ public class VJuego extends JFrame {
 
 					if(teclaPulsada[3]==true){
 						System.out.println("  Vuelta a pausa " + VentJuego.isHiloSigue());
-						setHiloSigue(false);
+						setPausa(true);
 						VPausa vpausa = new VPausa(Vinicio,VJuego.this);
 						teclaPulsada[3] = false;
 						vpausa.setVisible(true);
