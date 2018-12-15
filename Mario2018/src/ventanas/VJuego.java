@@ -377,10 +377,15 @@ public class VJuego extends JFrame {
 					}
 					if (Mundo.interseccionArriba()){
 						Mario.velY=0;
-						if (teclaPulsada[0]&& teclaPulsada[1]){
+						if (teclaPulsada[0] ){
 							Mario.saltoMario();
 							ClipSalto.play();
-						}else if (teclaPulsada[0] && teclaPulsada[2]) {
+							}
+						if (teclaPulsada[0] && teclaPulsada[1]){
+							Mario.saltoMario();
+							ClipSalto.play();
+						}
+						if (teclaPulsada[0] && teclaPulsada[2]) {
 							Mario.saltoMarioEspejo();
 							ClipSalto.play();
 					}
