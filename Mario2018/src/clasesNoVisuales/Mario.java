@@ -5,7 +5,7 @@ import estructuras.JLabelMario;
 
 /**
  * Clase heredera de personaje que define las instancias lógicas de Mario
- * 
+ * aa
  */
 
 public class Mario extends Personaje{
