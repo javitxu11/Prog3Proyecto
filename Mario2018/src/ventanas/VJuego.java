@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
-
+import estructuras.JLabelMario;
 import estructuras.JPanelFondo;
 import clasesNoVisuales.Mario;
 import clasesNoVisuales.Mundo;
@@ -28,7 +28,8 @@ public class VJuego extends JFrame {
 	 */
 	private VInicio Vinicio;
 	public VJuego VentJuego=this;
-	
+	int EstadoMarioDerecha=0;
+	int EstadoMarioIzquierda=0;
 	private int Score;
 	public int minLeft;
 	public int secLeft;
@@ -54,7 +55,7 @@ public class VJuego extends JFrame {
 	
 	
 	public VJuego(VInicio vinicio) {
-		System.out.println( "Creando ventana juego" );
+		
 		Vinicio=vinicio; 
 		setResizable(false);
 		setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(),345);
@@ -85,7 +86,7 @@ public class VJuego extends JFrame {
 					break;
 				}
 				case KeyEvent.VK_ESCAPE: {
-					System.out.println( "Pulsa escape");
+					
 					teclaPulsada[3] = true;
 					
 					break;
@@ -108,7 +109,7 @@ public class VJuego extends JFrame {
 					break;
 				}
 				case KeyEvent.VK_ESCAPE: {
-					System.out.println( "Suelta escape");
+					
 					teclaPulsada[3] = false;
 					break;
 				}
@@ -196,7 +197,6 @@ public class VJuego extends JFrame {
 		while(minLeft>=0 && isHiloSigue() ){
 			
 			while(secLeft>=0 && isHiloSigue()){
-				System.out.println(minLeft+" "+secLeft);
 				delaySegundo();
 				LabelTemp.setText(minLeft+":"+secLeft);
 				if(!enPausa) {
@@ -250,7 +250,7 @@ public class VJuego extends JFrame {
 	class MiRunnable implements Runnable {
 		
 		public void run() { // Bucle principal forever hasta que se pare el juego...
-			System.out.println(VentJuego+"  "+VentJuego.isHiloSigue());
+			
 			while (sigo){
 				// System.out.println("  " + VentJuego.isHiloSigue());
 				try {
@@ -269,7 +269,7 @@ public class VJuego extends JFrame {
 					}
 
 					if(teclaPulsada[3]==true){
-						System.out.println("  Vuelta a pausa " + VentJuego.isHiloSigue());
+						
 						setPausa(true);
 						VPausa vpausa = new VPausa(Vinicio,VJuego.this);
 						teclaPulsada[3] = false;
@@ -320,7 +320,28 @@ public class VJuego extends JFrame {
 					Mundo.EstadoMonedas++;
 					if(Mundo.EstadoMonedas==100){
 						Mundo.EstadoMonedas=0;
+						
 					}
+					
+					EstadoMarioDerecha++;
+					if(EstadoMarioDerecha==15){
+						JLabelMario.estadoDerecha=1;
+						
+					}
+					if(EstadoMarioDerecha==30){
+						JLabelMario.estadoDerecha=0;
+						EstadoMarioDerecha=0;
+						
+					}
+					EstadoMarioIzquierda++;
+					if(EstadoMarioIzquierda==15){
+						JLabelMario.estadoIzquierda=1;
+					}
+					if(EstadoMarioIzquierda==30){
+						JLabelMario.estadoIzquierda=0;
+						EstadoMarioIzquierda=0;
+					}
+					
 					// CORRECCION DE COLISIONES
 					// CORRECCION DE COLISIONES
 					Mundo.interseccionEsquinasArriba();
@@ -356,10 +377,13 @@ public class VJuego extends JFrame {
 					}
 					if (Mundo.interseccionArriba()){
 						Mario.velY=0;
-						if (teclaPulsada[0]){
+						if (teclaPulsada[0]&& teclaPulsada[1]){
 							Mario.saltoMario();
 							ClipSalto.play();
-						}
+						}else if (teclaPulsada[0] && teclaPulsada[2]) {
+							Mario.saltoMarioEspejo();
+							ClipSalto.play();
+					}
 					}
 
 					if(!Mundo.interseccionArriba() && Mario.salto){
@@ -388,7 +412,9 @@ public class VJuego extends JFrame {
 					// DERECHA
 					if (!Mundo.interseccionIzquierda()) {
 						if (teclaPulsada[1]) {
-							//				System.out.println(pPrincipal.getVar());
+							
+							
+							
 							Mario.getGrafico().setComponentOrientationNormal();
 							if(pPrincipal.getVar() > (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()-7320){
 								pPrincipal.setVar(pPrincipal.getVar()-Mario.velX);
@@ -404,6 +430,8 @@ public class VJuego extends JFrame {
 					//			 IZQUIERDA
 					if (!Mundo.interseccionDerecha()) {
 						if (teclaPulsada[2]) {
+							
+							
 							Mario.getGrafico().setComponentOrientationEspejo();
 							if(pPrincipal.getVar() < 0){
 								pPrincipal.setVar(pPrincipal.getVar()+Mario.velX);

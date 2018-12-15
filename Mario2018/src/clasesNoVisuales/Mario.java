@@ -5,7 +5,7 @@ import estructuras.JLabelMario;
 
 /**
  * Clase heredera de personaje que define las instancias lógicas de Mario
- * aa
+ * 
  */
 
 public class Mario extends Personaje{
@@ -14,7 +14,7 @@ public class Mario extends Personaje{
 	public boolean salto; // Atributo que guarda si Mario ha realizado un salto
 	public boolean caida; // Atributo que guarda si ha habido o no una caida
 	public boolean cont; // Atributo contador
-	public int velY;
+	public static int velY;
 	public int velX;
 	
 	/**  Crea un nuevo personaje de juego (Mario)
@@ -100,6 +100,13 @@ public class Mario extends Personaje{
 		getGrafico().setComponentOrientationSalto();
 		salto=true;
 		velY=-1;
+	}
+
+	public void saltoMarioEspejo() {
+		getGrafico().setComponentOrientationSaltoEspejo();
+		salto=true;
+		velY=-1;
+		
 	}
 }
 

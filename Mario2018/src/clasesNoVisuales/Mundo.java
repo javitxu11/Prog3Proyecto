@@ -15,6 +15,7 @@ import estructuras.JLabelRectangulo;
 import estructuras.JPanelFondo;
 
 public class Mundo {
+	
 	public JPanelFondo panel; // Atributo del panel visual del juego
 	static Mario Mario; // Atributo que contiene al Mario del juego
 	ImageIcon MiImageIcon=null;

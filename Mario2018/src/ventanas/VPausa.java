@@ -19,7 +19,7 @@ public class VPausa extends JFrame {
 	private JPanel contentPane;
 	
 	public VPausa(VInicio vinicio, VJuego vjuego) {
-		System.out.println( "Creando pausa");
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 272, 292);
 		setLocationRelativeTo(null);
@@ -42,7 +42,7 @@ public class VPausa extends JFrame {
 		JButton BotonResume = new JButton();
 		BotonResume.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Resume");
+				
 				vjuego.setPausa(false);
 				//int secsleft=vjuego.getSecLeft();
 			//int minsleft=vjuego.getMinLeft();
@@ -60,7 +60,7 @@ public class VPausa extends JFrame {
 		JButton BotonRestart = new JButton();
 		BotonRestart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Restart");
+				
 				vjuego.miHilo.stop();
 				vjuego.dispose();
 				VJuego ventana2 = new VJuego(vinicio);
@@ -80,7 +80,7 @@ public class VPausa extends JFrame {
 		JButton BotonMenu = new JButton();
 		BotonMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Menu");
+				
 				vjuego.miHilo.stop();
 				vinicio.setVisible(true);
 				dispose();

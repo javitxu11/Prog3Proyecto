@@ -4,9 +4,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import clasesNoVisuales.Mario;
+import clasesNoVisuales.Mundo;
 
 public class JLabelMario extends JLabel {
 	private static final long serialVersionUID = 8L; // Para serialización
@@ -14,19 +18,25 @@ public class JLabelMario extends JLabel {
 	public static final int TAMANYO_MARIOx = 23; // píxels (igual ancho que largo)
 	public static final int TAMANYO_MARIOy = 31; // píxels (igual ancho que largo)
 	
+	public static final int TAMANYO_LUIGIx = 20; // píxels (igual ancho que largo)
+	public static final int TAMANYO_LUIGIy = 40; // píxels (igual ancho que largo)
+	
 	
 	public static final int ARISTA_RECTANGULO_MARIO = 30; // Radio en píxels del rectangulo del Mario(para choques)
 	
 	private static final boolean DIBUJAR_RECTANGULO_MARIO = false; // Dibujado (paradepuración)del bounding rectangle de choque de Mario
 	
 	private boolean Espejo = false; //Atributo para saber si hay que aplicarle el método de espejo a la imagen de Mario
-	
+	public static int estadoDerecha=0;
+	public static int estadoIzquierda=0;
+	public static int personaje;
 
 	/**
 	 * Construye y devuelve el JLabel del Mario con su gráfico y tamaño
 	 */
 	
 	public JLabelMario() {
+		
 		try {
 
 			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuieto.png").toURI().toURL()));
@@ -63,25 +73,40 @@ public class JLabelMario extends JLabel {
 	 */
 
 	public void setComponentOrientationEspejo() {
-		try {
-
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioEspejo.png").toURI().toURL()));
-		} catch (Exception e) {
-			System.err.println("Error en carga de recurso: MarioEspejo.png no encontrado");
-			e.printStackTrace();
-		}
-		setSize(TAMANYO_MARIOx, TAMANYO_MARIOy);
-		Espejo = true;
-
+		
+		if(estadoIzquierda==0 && Mario.velY ==0  ) {
+			try {
+				setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioEspejo.png").toURI().toURL()));
+			} catch (Exception e) {
+				System.err.println("Error en carga de recurso: MarioEspejo.png no encontrado");
+				e.printStackTrace();
+			}
+			setSize(TAMANYO_MARIOx, TAMANYO_MARIOy);
+			Espejo = true;
+			
+			}else if (estadoIzquierda==1 &&Mario.velY ==0  ) {
+				try {
+					setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuietoEspejo.png").toURI().toURL()));
+					
+				} catch (Exception e) {
+					System.err.println("Error en carga de recurso: MarioQuietoEspejo.png no encontrado");
+					e.printStackTrace();
+				}
+				setSize(TAMANYO_MARIOx, TAMANYO_MARIOy);
+				Espejo = true;
+				
+				
+			}
 	}
+	
 	
 	/**
 	 * Método para Obtener la imagen de Mario corriendo en Modo normal
 	 */
 
 	public void setComponentOrientationNormal() {
+		if(estadoDerecha==0 && Mario.velY ==0   ) {
 		try {
-
 			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioAndando.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: MarioAndando.png no encontrado");
@@ -89,9 +114,21 @@ public class JLabelMario extends JLabel {
 		}
 		setSize(TAMANYO_MARIOx, TAMANYO_MARIOy);
 		Espejo = false;
-
+		
+		}else if (estadoDerecha==1 && Mario.velY ==0   ) {
+			try {
+				setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuieto.png").toURI().toURL()));
+				
+			} catch (Exception e) {
+				System.err.println("Error en carga de recurso: MarioQuieto.png no encontrado");
+				e.printStackTrace();
+			}
+			setSize(TAMANYO_MARIOx, TAMANYO_MARIOy);
+			Espejo = false;
+			
+			
+		}
 	}
-	
 	/**
 	 * Método para Obtener la imagen de Mario Saltando en Modo normal
 	 */
