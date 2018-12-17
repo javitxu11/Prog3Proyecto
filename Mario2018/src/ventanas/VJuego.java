@@ -207,7 +207,7 @@ public class VJuego extends JFrame {
 			minLeft--;
 		}
 		
-		VentJuego.miHilo1.acabaMuerto();
+		VentJuego.miHilo.acabaMuerto();
 	}
 	public int getMinLeft() {
 		return minLeft;
