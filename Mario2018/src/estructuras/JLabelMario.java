@@ -18,7 +18,16 @@ public class JLabelMario extends JLabel {
 	public static final int TAMANYO_MARIOx = 23; // píxels (igual ancho que largo)
 	public static final int TAMANYO_MARIOy = 31; // píxels (igual ancho que largo)
 	
-	public String Npersonaje="MARIO";
+	public static String Npersonaje="MARIO";
+	
+	public String getNpersonaje() {
+		return Npersonaje;
+	}
+
+	public static void setNpersonaje(String npersonaje) {
+		Npersonaje = npersonaje;
+	}
+
 	public static final int ARISTA_RECTANGULO_MARIO = 30; // Radio en píxels del rectangulo del Mario(para choques)
 	
 	private static final boolean DIBUJAR_RECTANGULO_MARIO = false; // Dibujado (paradepuración)del bounding rectangle de choque de Mario

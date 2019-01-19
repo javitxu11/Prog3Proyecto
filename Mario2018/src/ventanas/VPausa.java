@@ -17,7 +17,14 @@ public class VPausa extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	public static int exit;
 	
+	public static int getExit() {
+		return exit;
+	}
+	public static void setExit(int exit) {
+		VPausa.exit = exit;
+	}
 	public VPausa(VInicio vinicio, VJuego vjuego) {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -80,9 +87,9 @@ public class VPausa extends JFrame {
 		JButton BotonMenu = new JButton();
 		BotonMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				exit=1;
 				vjuego.miHilo.stop();
-				vinicio.setVisible(true);
+				vjuego.dispose();
 				dispose();
 			}
 		});

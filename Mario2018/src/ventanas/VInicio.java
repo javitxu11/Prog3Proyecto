@@ -17,7 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.awt.event.ActionEvent;
-
+import estructuras.JLabelMario;
 public class VInicio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -81,6 +81,8 @@ public class VInicio extends JFrame {
 			}
 		});
 		
+		
+		
 		BotonExit.setIcon(new ImageIcon(VFinalMala.class.getResource("/imagenes/ExitButton.png")));
 		BotonExit.setBounds(525, 10, 100, 35);
 		BotonExit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -96,6 +98,32 @@ public class VInicio extends JFrame {
 				
 			}
 		});
+		
+		JButton BotonMario= new JButton();
+		BotonExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JLabelMario.setNpersonaje("MARIO");
+			}
+		});
+		//BotonMario.setIcon(new ImageIcon(VFinalMala.class.getResource("/imagenes/ExitButton.png")));
+		BotonMario.setBounds(100, 11, 80, 30);
+		BotonMario.setText("MARIO");
+		BotonMario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
+		ImagenFondo.add(BotonMario);
+		
+		JButton BotonLuigi= new JButton();
+		BotonExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JLabelMario.setNpersonaje("LUIGI");
+			}
+		});
+		//BotonMario.setIcon(new ImageIcon(VFinalMala.class.getResource("/imagenes/ExitButton.png")));
+		BotonLuigi.setBounds(200, 11, 80, 30);
+		BotonLuigi.setText("LUIGI");
+		BotonLuigi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		ImagenFondo.add(BotonLuigi);
+		
 		BotonRanking.setIcon(new ImageIcon(VInicio.class.getResource("/imagenes/Ranking.png")));
 		BotonRanking.setBounds(24, 413, 150, 44);
 		BotonRanking.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -206,8 +206,12 @@ public class VJuego extends JFrame {
 			secLeft=59;
 			minLeft--;
 		}
-		
-		VentJuego.miHilo.acabaMuerto();
+		if(VPausa.getExit()==1) {
+			Vinicio.setVisible(true);
+			VPausa.setExit(0);
+		}else {
+			VentJuego.miHilo1.acabaMuerto();
+		}
 	}
 	public int getMinLeft() {
 		return minLeft;
