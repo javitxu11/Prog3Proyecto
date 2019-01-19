@@ -18,10 +18,7 @@ public class JLabelMario extends JLabel {
 	public static final int TAMANYO_MARIOx = 23; // píxels (igual ancho que largo)
 	public static final int TAMANYO_MARIOy = 31; // píxels (igual ancho que largo)
 	
-	public static final int TAMANYO_LUIGIx = 20; // píxels (igual ancho que largo)
-	public static final int TAMANYO_LUIGIy = 40; // píxels (igual ancho que largo)
-	
-	
+	public String Npersonaje="MARIO";
 	public static final int ARISTA_RECTANGULO_MARIO = 30; // Radio en píxels del rectangulo del Mario(para choques)
 	
 	private static final boolean DIBUJAR_RECTANGULO_MARIO = false; // Dibujado (paradepuración)del bounding rectangle de choque de Mario
@@ -39,7 +36,7 @@ public class JLabelMario extends JLabel {
 		
 		try {
 
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuieto.png").toURI().toURL()));
+			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"Quieto.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: MarioQuieto.png no encontrado");
 			e.printStackTrace();
@@ -76,7 +73,7 @@ public class JLabelMario extends JLabel {
 		
 		if(estadoIzquierda==0 && Mario.velY ==0  ) {
 			try {
-				setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioEspejo.png").toURI().toURL()));
+				setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"Espejo.png").toURI().toURL()));
 			} catch (Exception e) {
 				System.err.println("Error en carga de recurso: MarioEspejo.png no encontrado");
 				e.printStackTrace();
@@ -86,7 +83,7 @@ public class JLabelMario extends JLabel {
 			
 			}else if (estadoIzquierda==1 &&Mario.velY ==0  ) {
 				try {
-					setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuietoEspejo.png").toURI().toURL()));
+					setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"QuietoEspejo.png").toURI().toURL()));
 					
 				} catch (Exception e) {
 					System.err.println("Error en carga de recurso: MarioQuietoEspejo.png no encontrado");
@@ -107,7 +104,7 @@ public class JLabelMario extends JLabel {
 	public void setComponentOrientationNormal() {
 		if(estadoDerecha==0 && Mario.velY ==0   ) {
 		try {
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioAndando.png").toURI().toURL()));
+			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"Andando.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: MarioAndando.png no encontrado");
 			e.printStackTrace();
@@ -117,8 +114,8 @@ public class JLabelMario extends JLabel {
 		
 		}else if (estadoDerecha==1 && Mario.velY ==0   ) {
 			try {
-				setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuieto.png").toURI().toURL()));
-				
+				setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"Quieto.png").toURI().toURL()));
+			
 			} catch (Exception e) {
 				System.err.println("Error en carga de recurso: MarioQuieto.png no encontrado");
 				e.printStackTrace();
@@ -136,7 +133,7 @@ public class JLabelMario extends JLabel {
 	public void setComponentOrientationSalto() {
 		try {
 
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioSalto.png").toURI().toURL()));
+			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"Salto.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: MarioSalto.png no encontrado");
 			e.printStackTrace();
@@ -153,7 +150,7 @@ public class JLabelMario extends JLabel {
 	public void setComponentOrientationSaltoEspejo() {
 		try {
 
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioSaltoEspejo.png").toURI().toURL()));
+			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"SaltoEspejo.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: MarioSaltoEspejo.png no encontrado");
 			e.printStackTrace();
@@ -165,7 +162,7 @@ public class JLabelMario extends JLabel {
 	public void setComponentOrientationMarioQuieto() {
 		try {
 
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuieto.png").toURI().toURL()));
+			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"Quieto.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: Mario.png no encontrado");
 			e.printStackTrace();
@@ -177,7 +174,7 @@ public class JLabelMario extends JLabel {
 	public void setComponentOrientationMarioQuietoEspejo() {
 		try {
 
-			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/MarioQuietoEspejo.png").toURI().toURL()));
+			setIcon(new ImageIcon(JLabelMario.class.getResource("/Imagenes/"+Npersonaje+"QuietoEspejo.png").toURI().toURL()));
 		} catch (Exception e) {
 			System.err.println("Error en carga de recurso: Mario.png no encontrado");
 			e.printStackTrace();
