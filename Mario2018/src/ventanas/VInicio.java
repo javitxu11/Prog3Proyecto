@@ -100,7 +100,7 @@ public class VInicio extends JFrame {
 		});
 		
 		JButton BotonMario= new JButton();
-		BotonExit.addActionListener(new ActionListener() {
+		BotonMario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JLabelMario.setNpersonaje("MARIO");
 			}
@@ -113,11 +113,12 @@ public class VInicio extends JFrame {
 		ImagenFondo.add(BotonMario);
 		
 		JButton BotonLuigi= new JButton();
-		BotonExit.addActionListener(new ActionListener() {
+		BotonLuigi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JLabelMario.setNpersonaje("LUIGI");
 			}
 		});
+		
 		//BotonMario.setIcon(new ImageIcon(VFinalMala.class.getResource("/imagenes/ExitButton.png")));
 		BotonLuigi.setBounds(200, 11, 80, 30);
 		BotonLuigi.setText("LUIGI");
