@@ -105,7 +105,7 @@ public class VInicio extends JFrame {
 				JLabelMario.setNpersonaje("MARIO");
 			}
 		});
-		//BotonMario.setIcon(new ImageIcon(VFinalMala.class.getResource("/imagenes/ExitButton.png")));
+		
 		BotonMario.setBounds(100, 11, 80, 30);
 		BotonMario.setText("MARIO");
 		BotonMario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -119,7 +119,7 @@ public class VInicio extends JFrame {
 			}
 		});
 		
-		//BotonMario.setIcon(new ImageIcon(VFinalMala.class.getResource("/imagenes/ExitButton.png")));
+		
 		BotonLuigi.setBounds(200, 11, 80, 30);
 		BotonLuigi.setText("LUIGI");
 		BotonLuigi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
