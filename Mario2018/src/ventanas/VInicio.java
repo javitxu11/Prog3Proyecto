@@ -18,12 +18,14 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import estructuras.JLabelMario;
-public class VInicio extends JFrame {
+public class VInicio extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private VInicio vinicio = this;
 	JtableTabla jtt = new JtableTabla();
+	private JRadioButton rdbtnMario;
+	private JRadioButton rdbtnLuigi;
 	
 	static SqliteBD miBD;
 	static Connection miConexion;
@@ -99,32 +101,7 @@ public class VInicio extends JFrame {
 			}
 		});
 		
-		JButton BotonMario= new JButton();
-		BotonMario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JLabelMario.setNpersonaje("MARIO");
-			}
-		});
-		
-		BotonMario.setBounds(100, 11, 80, 30);
-		BotonMario.setText("MARIO");
-		BotonMario.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
-		ImagenFondo.add(BotonMario);
-		
-		JButton BotonLuigi= new JButton();
-		BotonLuigi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				JLabelMario.setNpersonaje("LUIGI");
-			}
-		});
-		
-		
-		BotonLuigi.setBounds(200, 11, 80, 30);
-		BotonLuigi.setText("LUIGI");
-		BotonLuigi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		ImagenFondo.add(BotonLuigi);
-		
+
 		BotonRanking.setIcon(new ImageIcon(VInicio.class.getResource("/imagenes/Ranking.png")));
 		BotonRanking.setBounds(24, 413, 150, 44);
 		BotonRanking.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -144,6 +121,32 @@ public class VInicio extends JFrame {
 		BotonAjustes.setBorderPainted(false);
 		ImagenFondo.add(BotonAjustes);
 		
+		rdbtnLuigi = new JRadioButton("Luigi");
+		rdbtnLuigi.setBounds(100, 116, 155, 29);
+		ImagenFondo.add(rdbtnLuigi);
+
+		rdbtnMario = new JRadioButton("Mario");
+		rdbtnMario.setBounds(100, 62, 155, 29);
+		ImagenFondo.add(rdbtnMario);
+
+		ButtonGroup rbGroup = new ButtonGroup();
+		rbGroup.add(rdbtnMario);
+		rbGroup.add(rdbtnLuigi);
+
+		rdbtnLuigi.addActionListener(this);
+		rdbtnMario.addActionListener(this);
 		setUndecorated(true);
 	}
+	@Override
+    public void actionPerformed(ActionEvent e) {
+        JRadioButton button = (JRadioButton) e.getSource();
+        if (button == rdbtnLuigi) {
+            JLabelMario.setNpersonaje("LUIGI");
+ 
+        } else if (button == rdbtnMario) {
+ 
+            JLabelMario.setNpersonaje("MARIO");
+ 
+        } 
+    }
 }
